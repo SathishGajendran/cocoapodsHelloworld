@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.summary      = "A short description of AUIOSSDK."
   s.license      = "MIT"
   s.platform     = :ios, "9.0"
-  s.source       = { :path => '.' }
+  s.source       = { :git => 'https://github.com/SathishGajendran/cocoapadsHelloworld', :tag => '1.0.0' }
   s.source_files = "AUIOSSDK", "AUIOSSDK/**/*.{h,m,swift}"
   # s.resources    = "AUIOSSDK
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3'}
@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = "desc"
 
-  s.homepage     = "https://english.com"
+  s.homepage     = "https://sathishgajendran@github.io"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
