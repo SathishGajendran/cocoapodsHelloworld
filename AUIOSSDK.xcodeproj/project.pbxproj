@@ -11,6 +11,7 @@
 		240EBC7E1F84F12B001CCC55 /* AUIOSSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EBC7D1F84F12B001CCC55 /* AUIOSSDKTests.m */; };
 		240EBC801F84F12B001CCC55 /* AUIOSSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 240EBC721F84F12B001CCC55 /* AUIOSSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		240EBC8A1F84F199001CCC55 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240EBC891F84F199001CCC55 /* main.swift */; };
+		24AC02AA1F879626001A1247 /* AUIOSSDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 24AC02A91F879626001A1247 /* AUIOSSDK.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		240EBC7D1F84F12B001CCC55 /* AUIOSSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AUIOSSDKTests.m; sourceTree = "<group>"; };
 		240EBC7F1F84F12B001CCC55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		240EBC891F84F199001CCC55 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		24AC02A91F879626001A1247 /* AUIOSSDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUIOSSDK.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 		240EBC651F84F12B001CCC55 = {
 			isa = PBXGroup;
 			children = (
+				24AC02A91F879626001A1247 /* AUIOSSDK.podspec */,
 				240EBC711F84F12B001CCC55 /* AUIOSSDK */,
 				240EBC7C1F84F12B001CCC55 /* AUIOSSDKTests */,
 				240EBC701F84F12B001CCC55 /* Products */,
@@ -182,6 +185,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24AC02AA1F879626001A1247 /* AUIOSSDK.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

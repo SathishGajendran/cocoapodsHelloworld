@@ -16,14 +16,17 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "AUIOSSDK"
-  s.version      = "0.0.1"
-  s.summary      = "A short description of AUIOSSDK."
+  s.version      = "1.0.0"
+  s.summary      = "AUIOSSDK."
   s.license      = "MIT"
   s.platform     = :ios, "9.0"
-  s.source       = { :git => 'https://github.com/SathishGajendran/cocoapadsHelloworld', :tag => '1.0.0' }
+
+  s.source       = { :git => 'https://github.com/SathishGajendran/cocoapadsHelloworld.git', :tag => '1.0.0' }
+
   s.source_files = "AUIOSSDK", "AUIOSSDK/**/*.{h,m,swift}"
+
   # s.resources    = "AUIOSSDK
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3'}
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => `echo "2.3" > .swift-version`}
   
   
   
@@ -32,7 +35,7 @@ Pod::Spec.new do |s|
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description  = "desc"
+  s.description  = "https://github.com/SathishGajendran/cocoapadsHelloworld"
 
   s.homepage     = "https://sathishgajendran@github.io"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -140,5 +143,5 @@ Pod::Spec.new do |s|
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
-
+    s.dependency 'Alamofire', '~> 4.5'
 end
