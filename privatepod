@@ -1,0 +1,403 @@
+How to create a private pod with a Bitbucket repo and Cocoapods in iOS
+ Previous
+private-repo_pods-ios-with-cocoapods
+If you maintain a private framework, you might get frustrated by the process of having to update all your projects using it manually. Luckily Cococapods allows you to create private pods from a private repository. Once you set it up, you will only have to run “pod install” in your projects to update your libraries.
+
+Creating a private pod specs repository
+
+First of all you will need to create an empty private repository to hold all your pods specs. This repo address will be the source you will mention in your podfile to tell cocoapods where to find all the private repos, ex:
+
+
+source 'https://bitbucket.org/kalianey/kalianeypods.git'
+source 'https://github.com/CocoaPods/Specs.git'
+1
+2
+source 'https://bitbucket.org/kalianey/kalianeypods.git'
+source 'https://github.com/CocoaPods/Specs.git'
+Once you have created it, add it to cocoapods like this:
+
+
+pod repo add REPONAME 'https://bitbucket.org/USERNAME/REPONAME.git'
+1
+pod repo add REPONAME 'https://bitbucket.org/USERNAME/REPONAME.git'
+Linking it to your private project repository
+
+Navigate to your framework or library repository, create a new branch named ‘0.0.1’ (if you haven’t any tag yet) and push it to your remote
+Run the following command to create the .podspec file
+
+pod spec create NameOFFramework
+1
+pod spec create NameOFFramework
+Open the podspec file, and fill it out. Here is an example of my podspec:
+
+#  Be sure to run `pod spec lint SimpleCameraFramework.podspec' to ensure this is a
+#  valid spec and to remove all comments including this before submitting the spec.
+#
+#  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html
+#  To see working Podspecs in the CocoaPods repo see https://github.com/CocoaPods/Specs/
+#
+
+Pod::Spec.new do |s|
+
+  # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  #
+  #  These will help people to find your library, and whilst it
+  #  can feel like a chore to fill in it's definitely to your advantage. The
+  #  summary should be tweet-length, and the description more in depth.
+  #
+
+  s.name         = "SimpleCameraFramework"
+  s.version      = "0.0.1"
+  s.summary      = "A Simple Camera Framework."
+
+  # This description is used to generate tags and improve search results.
+  #   * Think: What does it do? Why did you write it? What is the focus?
+  #   * Try to keep it short, snappy and to the point.
+  #   * Write the description between the DESC delimiters below.
+  #   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.description  = <<-DESC
+                  SimpleCamera is a framework leveraging the power of AVFoundation for better photo and video experience.
+                   DESC
+
+  s.homepage     = "https://bitbucket.org/kalianey/simplecameraframework"
+  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+
+
+  # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  #
+  #  Licensing your code is important. See http://choosealicense.com for more info.
+  #  CocoaPods will detect a license file if there is a named LICENSE*
+  #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
+  #
+
+  s.license      = { :type => 'MIT', :file => "license.txt" }
+  # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+
+
+  # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  #
+  #  Specify the authors of the library, with email addresses. Email addresses
+  #  of the authors are extracted from the SCM log. E.g. $ git log. CocoaPods also
+  #  accepts just a name if you'd rather not provide an email address.
+  #
+  #  Specify a social_media_url where others can refer to, for example a twitter
+  #  profile URL.
+  #
+
+  s.author             = { "Kalianey" => "contact@kalianey.com" }
+
+
+  # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  #
+  #  If this Pod runs only on iOS or OS X, then specify the platform and
+  #  the deployment target. You can optionally include the target after the platform.
+  #
+
+  s.platform     = :ios
+  s.platform     = :ios, "8.0"
+
+  #  When using multiple platforms
+  # s.ios.deployment_target = "5.0"
+  # s.osx.deployment_target = "10.7"
+  # s.watchos.deployment_target = "2.0"
+  # s.tvos.deployment_target = "9.0"
+
+
+  # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  #
+  #  Specify the location from where the source should be retrieved.
+  #  Supports git, hg, bzr, svn and HTTP.
+  #
+
+  s.source       = { :git => "https://bitbucket.org/kalianey/simplecameraframework.git", :tag => "#{s.version}" }
+
+
+  # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  #
+  #  CocoaPods is smart about how it includes source code. For source files
+  #  giving a folder will include any swift, h, m, mm, c & cpp files.
+  #  For header files it will include any header in the folder.
+  #  Not including the public_header_files will make all headers public.
+  #
+
+  s.source_files  = "*", "SimpleCameraFramework/*"
+  s.exclude_files = "Classes/Exclude"
+
+  # s.public_header_files = "Classes/**/*.h"
+
+end
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+#  Be sure to run `pod spec lint SimpleCameraFramework.podspec' to ensure this is a
+#  valid spec and to remove all comments including this before submitting the spec.
+#
+#  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html
+#  To see working Podspecs in the CocoaPods repo see https://github.com/CocoaPods/Specs/
+#
+ 
+Pod::Spec.new do |s|
+ 
+  # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  #
+  #  These will help people to find your library, and whilst it
+  #  can feel like a chore to fill in it's definitely to your advantage. The
+  #  summary should be tweet-length, and the description more in depth.
+  #
+ 
+  s.name         = "SimpleCameraFramework"
+  s.version      = "0.0.1"
+  s.summary      = "A Simple Camera Framework."
+ 
+  # This description is used to generate tags and improve search results.
+  #   * Think: What does it do? Why did you write it? What is the focus?
+  #   * Try to keep it short, snappy and to the point.
+  #   * Write the description between the DESC delimiters below.
+  #   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.description  = <<-DESC
+                  SimpleCamera is a framework leveraging the power of AVFoundation for better photo and video experience.
+                   DESC
+ 
+  s.homepage     = "https://bitbucket.org/kalianey/simplecameraframework"
+  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+ 
+ 
+  # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  #
+  #  Licensing your code is important. See http://choosealicense.com for more info.
+  #  CocoaPods will detect a license file if there is a named LICENSE*
+  #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
+  #
+ 
+  s.license      = { :type => 'MIT', :file => "license.txt" }
+  # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+ 
+ 
+  # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  #
+  #  Specify the authors of the library, with email addresses. Email addresses
+  #  of the authors are extracted from the SCM log. E.g. $ git log. CocoaPods also
+  #  accepts just a name if you'd rather not provide an email address.
+  #
+  #  Specify a social_media_url where others can refer to, for example a twitter
+  #  profile URL.
+  #
+ 
+  s.author             = { "Kalianey" => "contact@kalianey.com" }
+ 
+ 
+  # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  #
+  #  If this Pod runs only on iOS or OS X, then specify the platform and
+  #  the deployment target. You can optionally include the target after the platform.
+  #
+ 
+  s.platform     = :ios
+  s.platform     = :ios, "8.0"
+ 
+  #  When using multiple platforms
+  # s.ios.deployment_target = "5.0"
+  # s.osx.deployment_target = "10.7"
+  # s.watchos.deployment_target = "2.0"
+  # s.tvos.deployment_target = "9.0"
+ 
+ 
+  # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  #
+  #  Specify the location from where the source should be retrieved.
+  #  Supports git, hg, bzr, svn and HTTP.
+  #
+ 
+  s.source       = { :git => "https://bitbucket.org/kalianey/simplecameraframework.git", :tag => "#{s.version}" }
+ 
+ 
+  # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  #
+  #  CocoaPods is smart about how it includes source code. For source files
+  #  giving a folder will include any swift, h, m, mm, c & cpp files.
+  #  For header files it will include any header in the folder.
+  #  Not including the public_header_files will make all headers public.
+  #
+ 
+  s.source_files  = "*", "SimpleCameraFramework/*"
+  s.exclude_files = "Classes/Exclude"
+ 
+  # s.public_header_files = "Classes/**/*.h"
+ 
+end
+You can specify the source_files pattern by following this document:podspecs_patterns
+Once it is done, run pod spec lint  to check everything is ok. If the specs are validated, commit and push to your project repo.
+Finally, we need to add the .podspec file to pod, by running the following command while being in the same directory where your podspec is located:
+
+pod repo push REPONAME NAMEOFPODSPECFILE.podspec
+1
+pod repo push REPONAME NAMEOFPODSPECFILE.podspec
+
+==> if you have been modifying your .podspec file in between, you might run into an the repo is not clean error. In this case, run the following commands:
+
+~/.cocoapods/repos/YourRepo`
+git status
+git add .
+git commit (`i` to insert command, `esc` and then `:x` to save
+git push
+1
+2
+3
+4
+5
+~/.cocoapods/repos/YourRepo`
+git status
+git add .
+git commit (`i` to insert command, `esc` and then `:x` to save
+git push
+
+In case your modification are not being found by pod, run pod cache clean --all , and try again to validate your pod with pod spec lint
+ 
+
+Including your private pod in your podfile
+
+That’s it, now you should be able to install your framework through by editing your podfile, adding the source of your private repo at the top (and the standard cocoapods source), and adding your pod name:
+
+
+# Insert your own private specs repo source
+source 'https://bitbucket.org/kalianey/kalianeypods.git'
+# Standard cocoapods specs source
+source 'https://github.com/CocoaPods/Specs.git'
+
+# Uncomment this line to define a global platform for your project
+platform :ios, '9.0'
+# Uncomment this line if you're using Swift
+use_frameworks!
+
+target 'TestPrivatePodsObjc' do
+
+    pod 'SimpleCameraFramework'
+    pod 'SVProgressHUD'
+    
+end
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+# Insert your own private specs repo source
+source 'https://bitbucket.org/kalianey/kalianeypods.git'
+# Standard cocoapods specs source
+source 'https://github.com/CocoaPods/Specs.git'
+ 
+# Uncomment this line to define a global platform for your project
+platform :ios, '9.0'
+# Uncomment this line if you're using Swift
+use_frameworks!
+ 
+target 'TestPrivatePodsObjc' do
+ 
+    pod 'SimpleCameraFramework'
+    pod 'SVProgressHUD'
+    
+end
+ 
