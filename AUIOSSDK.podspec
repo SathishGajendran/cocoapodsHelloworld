@@ -62,9 +62,9 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "Sathish Gajendran" => "sathish.gajendran@pearson.com" }
+  s.author             = { "Sathish Gajendran" => "sathish.gajendran@gmail.com" }
   # Or just: s.author    = "Sathish Gajendran"
-  # s.authors            = { "Sathish Gajendran" => "sathish.gajendran@pearson.com" }
+  # s.authors            = { "Sathish Gajendran" => "sathish.gajendran@gmail.com" }
   # s.social_media_url   = "http://twitter.com/Sathish Gajendran"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
