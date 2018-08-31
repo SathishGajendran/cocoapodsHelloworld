@@ -6,42 +6,42 @@ import Alamofire
 
 public class AU {
     
-    public var trackerId: String = "";
-    public var originatingSystemCode: String = "";
+    public var AppId: String = "";
+    public var param1: String = "";
     
     public init(_ config: NSDictionary){
-        self.trackerId = config.value(forKey: "trackerId") as! String
-        self.originatingSystemCode = config.value(forKey: "originatingSystemCode") as! String
+        self.AppId = config.value(forKey: "AppId") as! String
+        self.param1 = config.value(forKey: "param1") as! String
     }
     
-    public func sendEvent(_ data: NSDictionary) {
+    public func send(_ data: NSDictionary) {
         
 //        print(data);
-//        print(self.trackerId)
+//        print(self.AppId)
         
         let payload = data.value(forKey: "payload")! as! NSDictionary;
         
         let headers: HTTPHeaders = [
-            "PETRACKER-TRACKING-ID": self.trackerId
+            "AppId": self.AppId
         ]
         
-//        print(data.value(forKey: "actionType")!);
-//        print(payload.value(forKey: "url")!)
+//        print(data.value(forKey: "param2")!);
+//        print(param2.value(forKey: "url")!)
         
         
         let parameters: Parameters = [
             "data":[
-                "originatingSystemCode":self.originatingSystemCode,
-                "events":[
+                "param1":self.param1,
+                "param2":[
                             [
-                                "messageTypeCode":data.value(forKey: "messageTypeCode")!,
-                                "messageVersion":data.value(forKey: "messageVersion")!,
-                                "actionType":data.value(forKey: "actionType")!,
-                                "namespace":data.value(forKey: "namespace")!,
+                                "param3":data.value(forKey: "param3")!,
+                                "param4":data.value(forKey: "param4")!,
+                                "param5":data.value(forKey: "param5")!,
+                                "param6":data.value(forKey: "param6")!,
 //                                "payload":[
-//                                    "url":payload.value(forKey: "url")!,
-//                                    "userID":payload.value(forKey: "userID")!,
-//                                    "useragent":payload.value(forKey: "useragent")!
+//                                    "param7":payload.value(forKey: "param7")!,
+//                                    "param8":payload.value(forKey: "param8")!,
+//                                    "param9":payload.value(forKey: "param9")!
 //                                ]
                                 "payload":payload
                             ]
@@ -51,48 +51,11 @@ public class AU {
         
 //        print(parameters);
         
-        Alamofire.request("https://testapi.english.com/autobahn/collect/events", method: .post, parameters: parameters, headers:headers).responseJSON { response in
+        Alamofire.request("https://example.com/data", method: .post, parameters: parameters, headers:headers).responseJSON { response in
 //            let statusCode = response.response?.statusCode;
             print(response)
         }
         
-    }
-    
-    public func sendActivity(_ data: NSDictionary) {
-        
-        //        print(data);
-        //        print(self.trackerId)
-        
-        let payload = data.value(forKey: "payload")! as! NSDictionary;
-        
-        let headers: HTTPHeaders = [
-            "PETRACKER-TRACKING-ID": self.trackerId
-        ]
-        
-        //        print(data.value(forKey: "actionType")!);
-        //        print(payload.value(forKey: "url")!)
-        
-        
-        let parameters: Parameters = [
-            "data":[
-                "originatingSystemCode":self.originatingSystemCode,
-                "activities":[
-                    [
-                        "messageTypeCode":data.value(forKey: "messageTypeCode")!,
-                        "messageVersion":data.value(forKey: "messageVersion")!,
-                        "namespace":data.value(forKey: "namespace")!,
-                        "payload":payload
-                    ]
-                ]
-            ]
-        ];
-        
-//        print(parameters);
-        
-        Alamofire.request("https://testapi.english.com/autobahn/collect/activities", method: .post, parameters: parameters, headers:headers).responseJSON { response in
-            //            let statusCode = response.response?.statusCode;
-            print(response)
-        }
-        
+    }            
     }
 }
